@@ -1,98 +1,59 @@
-# Portfolio Starter
+# ClearDraft
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). This starter template includes a complete setup with shadcn/ui components and is designed to be used as a base for portfolio projects.
+ClearDraft is a private writing helper for a small high-school study group. It
+turns difficult source text into simple, natural educational writing. It does
+not save users' source text or results.
 
-## Using the Starter CLI
+## Run it on your computer
 
-This repository includes a CLI tool that allows you to initialize new projects from this starter template with a fresh git history.
+1. Install [Node.js 22 or newer](https://nodejs.org/).
+2. Install the project:
 
-### Installation
+   ```bash
+   npm install
+   ```
 
-Install the CLI tool globally from this repository:
+3. Copy the example settings file:
 
-```bash
-npm install -g .
-```
+   ```bash
+   cp .env.example .env.local
+   ```
 
-Or use it directly with npx (if published to npm):
+4. Open `.env.local` and change:
+   - `APP_PASSCODE` to the passcode shared with your five users.
+   - `AUTH_SECRET` to a long random value. Generate one with
+     `openssl rand -base64 32`.
+   - `AI_GATEWAY_API_KEY` to an
+     [AI Gateway API key](https://vercel.com/ai-gateway) when running locally.
 
-```bash
-npx github:your-username/Portfolio-Starter sriket <project-name>
-```
+5. Start the app:
 
-### Usage
+   ```bash
+   npm run dev
+   ```
 
-Create a new project from this starter:
+6. Visit [http://localhost:3000](http://localhost:3000).
 
-```bash
-sriket my-new-portfolio
-```
+## Deploy it on Vercel
 
-This will:
+1. Import this repository into [Vercel](https://vercel.com/new).
+2. Add `APP_PASSCODE` and `AUTH_SECRET` in the project's Environment Variables.
+3. Deploy. Vercel deployments can authenticate to AI Gateway with OIDC, so an
+   AI Gateway API key is normally only needed for local development.
+4. Share the deployment link and passcode only with the intended users.
 
-- Copy all files from the starter (excluding `.git` directory)
-- Initialize a fresh git repository
-- Create an initial commit
-- Update the project name in `package.json`
+## Change the output
 
-### Options
+- Edit the writing instructions in `lib/ai/educational-rewriter.ts`.
+- Change `AI_MODEL` in the environment settings to use another current Gateway
+  model. The default is `google/gemini-3.5-flash-lite`.
+- Source text is limited to 8,000 characters and model output to 1,400 tokens
+  to control costs.
 
-```bash
-# Specify a custom destination directory
-sriket my-new-portfolio --dir /path/to/destination
-
-# Or use the short form
-sriket my-new-portfolio -d /path/to/destination
-```
-
-### After Initialization
-
-Once your project is created:
-
-```bash
-cd my-new-portfolio
-npm install
-npm run dev
-```
-
-To connect to GitHub:
+## Useful commands
 
 ```bash
-git remote add origin <your-repo-url>
-git push -u origin main
+npm run dev      # Start local development
+npm run check    # Check formatting and code quality
+npm run build    # Make a production build
 ```
-
-## Getting Started (Development)
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
