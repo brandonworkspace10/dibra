@@ -144,8 +144,8 @@
   --border: #ded6c1;
   --input: #d6cdb6;
   --ring: #d97706;
-  --brand-d: #d6007f;
-  --brand-b: #ff1493;
+  --brand-d: #ff1493;
+  --brand-b: #b42318;
   --brand-text: #237a40;
 }
 
@@ -265,10 +265,7 @@
     animation: brand-heart-draw 5.4s ease-in-out infinite;
   }
 
-  .brand-heart-side-left {
-    stroke: var(--brand-d);
-  }
-
+  .brand-heart-side-left,
   .brand-heart-side-right,
   .brand-heart-point {
     stroke: var(--brand-b);

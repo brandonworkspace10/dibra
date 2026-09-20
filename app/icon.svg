@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect x="3" y="3" width="55" height="55" rx="15" fill="#fffef9" stroke="#16345d" stroke-width="4"/>
   <path d="M11 51h42" stroke="#f2c94c" stroke-width="6" stroke-linecap="round"/>
-  <text x="10" y="41" fill="#d6007f" font-family="Arial, sans-serif" font-size="27" font-weight="800">D</text>
-  <text x="31" y="41" fill="#ff1493" font-family="Arial, sans-serif" font-size="27" font-weight="800">B</text>
+  <text x="10" y="41" fill="#ff1493" font-family="Arial, sans-serif" font-size="27" font-weight="800">D</text>
+  <text x="31" y="41" fill="#b42318" font-family="Arial, sans-serif" font-size="27" font-weight="800">B</text>
 </svg>
