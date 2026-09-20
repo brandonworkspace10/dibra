@@ -13,8 +13,17 @@ const fredoka = Fredoka({
 });
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
   description:
     "Turn difficult source text into clear, natural high-school explanations.",
+  metadataBase: new URL("https://www.dbtext.dev"),
+  robots: {
+    follow: false,
+    index: false,
+    nocache: true,
+  },
   title: "ClearDraft — Study writing, made clear",
 };
 
