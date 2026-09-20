@@ -108,7 +108,7 @@ export function RewriterWorkspace() {
     sourceText.length <= MAX_SOURCE_CHARACTERS &&
     !isGenerating;
 
-  async function generateRewrite() {
+  async function generateRewrite(previousOutput?: string) {
     if (!canGenerate) {
       return;
     }
@@ -123,7 +123,13 @@ export function RewriterWorkspace() {
 
     try {
       const response = await fetch("/api/rewrite", {
-        body: JSON.stringify({ gradeLevel, mode, sourceText, subject }),
+        body: JSON.stringify({
+          gradeLevel,
+          mode,
+          previousOutput,
+          sourceText,
+          subject,
+        }),
         headers: { "Content-Type": "application/json" },
         method: "POST",
         signal: controller.signal,
@@ -318,6 +324,10 @@ export function RewriterWorkspace() {
               </Select>
             </div>
           </div>
+          <p className="mt-2 text-[var(--muted-foreground)] text-xs">
+            Subject changes how DBtext handles key terms and organizes the
+            explanation.
+          </p>
 
           <fieldset className="mode-fieldset">
             <legend>What should DBtext do?</legend>
@@ -378,7 +388,7 @@ export function RewriterWorkspace() {
           <Button
             className="generate-button"
             disabled={!canGenerate}
-            onClick={generateRewrite}
+            onClick={() => generateRewrite()}
             size="lg"
           >
             {isGenerating ? <Spinner /> : <WandSparkles aria-hidden="true" />}
@@ -416,14 +426,15 @@ export function RewriterWorkspace() {
                     </span>
                   </Button>
                   <Button
-                    aria-label="Try this rewrite again"
+                    aria-label="Generate a different version"
                     className="h-11"
                     disabled={isGenerating}
-                    onClick={generateRewrite}
+                    onClick={() => generateRewrite(output)}
                     size="sm"
                     variant="ghost"
                   >
                     <RefreshCw aria-hidden="true" />
+                    <span className="hidden sm:inline">New version</span>
                   </Button>
                 </>
               ) : null}

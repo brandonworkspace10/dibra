@@ -92,7 +92,7 @@ export async function POST(request: Request) {
       model: process.env.AI_MODEL ?? DEFAULT_MODEL,
       prompt,
       system,
-      temperature: 0.45,
+      temperature: parsed.data.previousOutput ? 0.7 : 0.55,
       timeout: 45_000,
     });
 
