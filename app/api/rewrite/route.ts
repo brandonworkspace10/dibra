@@ -6,7 +6,7 @@ import {
 } from "@/lib/ai/educational-rewriter";
 import { hasStudyAccess } from "@/lib/auth";
 
-const DEFAULT_MODEL = "google/gemini-3.8-flash";
+const DEFAULT_MODEL = "google/gemini-2.5-flash-lite";
 
 function hasGatewayAuthentication() {
   return Boolean(
@@ -29,6 +29,19 @@ function createGenerationErrorResponse(error: unknown) {
     return NextResponse.json(
       { error: "The AI service is busy. Wait a moment and try again." },
       { status: 429 }
+    );
+  }
+
+  if (
+    error instanceof Error &&
+    error.message.includes("Free tier users do not have access")
+  ) {
+    return NextResponse.json(
+      {
+        error:
+          "This model needs paid Gateway credits. Use google/gemini-2.5-flash-lite or add credits.",
+      },
+      { status: 403 }
     );
   }
 

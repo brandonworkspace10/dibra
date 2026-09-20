@@ -46,7 +46,8 @@ not save users' source text or results.
 
 - Edit the writing instructions in `lib/ai/educational-rewriter.ts`.
 - Change `AI_MODEL` in the environment settings to use another current Gateway
-  model. The default is `google/gemini-3.5-flash-lite`.
+  model. The default is `google/gemini-2.5-flash-lite`, which is compatible
+  with the current Gateway free tier.
 - Source text is limited to 8,000 characters and model output to 1,400 tokens
   to control costs.
 
