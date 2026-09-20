@@ -1,8 +1,9 @@
 "use client";
 
-import { BookOpenText, KeyRound } from "lucide-react";
+import { KeyRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
+import { BrandMark, BrandWordmark } from "@/components/brand";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,11 +48,11 @@ export function PasscodeGate() {
       <div aria-hidden="true" className="gate-doodle gate-doodle-right" />
 
       <section aria-labelledby="gate-title" className="gate-card">
-        <div className="brand-mark brand-mark-large">
-          <BookOpenText aria-hidden="true" />
-        </div>
+        <BrandMark className="brand-mark-large" />
         <p className="eyebrow">Private study space</p>
-        <h1 id="gate-title">ClearDraft</h1>
+        <h1 id="gate-title">
+          <BrandWordmark />
+        </h1>
         <p className="gate-intro">
           Turn difficult writing into clear explanations you can actually
           understand.

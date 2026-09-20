@@ -1,6 +1,6 @@
-# ClearDraft
+# DBtext
 
-ClearDraft is a private writing helper for a small high-school study group. It
+DBtext is a private writing helper for a small high-school study group. It
 turns difficult source text into simple, natural educational writing. It does
 not save users' source text or results.
 

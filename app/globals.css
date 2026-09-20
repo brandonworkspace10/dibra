@@ -144,6 +144,9 @@
   --border: #ded6c1;
   --input: #d6cdb6;
   --ring: #d97706;
+  --brand-d: #be185d;
+  --brand-b: #b42318;
+  --brand-text: #237a40;
 }
 
 @layer base {
@@ -185,21 +188,41 @@
 
 @layer components {
   .brand-mark {
-    display: grid;
+    display: flex;
     width: 2.65rem;
     height: 2.65rem;
-    place-items: center;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 auto;
     border: 1px solid #102d50;
     border-radius: 0.85rem;
-    color: #fff;
-    background: #16345d;
+    background: #fffef9;
     box-shadow: 3px 3px 0 #f2c94c;
+    font-family: var(--font-display), sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.12em;
+    line-height: 1;
   }
 
-  .brand-mark svg {
-    width: 1.35rem;
-    height: 1.35rem;
+  .brand-letter-d {
+    color: var(--brand-d);
+  }
+
+  .brand-letter-b {
+    color: var(--brand-b);
+  }
+
+  .brand-letter-text {
+    color: var(--brand-text);
+  }
+
+  .brand-wordmark {
+    display: inline-flex;
+    font-family: var(--font-display), sans-serif;
+    font-weight: 650;
+    letter-spacing: -0.055em;
+    line-height: 1;
   }
 
   .brand-mark-large {
@@ -208,11 +231,7 @@
     margin-inline: auto;
     border-radius: 1.05rem;
     box-shadow: 5px 5px 0 #f2c94c;
-  }
-
-  .brand-mark-large svg {
-    width: 1.75rem;
-    height: 1.75rem;
+    font-size: 1.35rem;
   }
 
   .gate-shell {

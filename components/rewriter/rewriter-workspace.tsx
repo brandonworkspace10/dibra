@@ -2,7 +2,6 @@
 
 import {
   ArrowRight,
-  BookOpenText,
   Check,
   Clipboard,
   Lightbulb,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { BrandMark, BrandWordmark } from "@/components/brand";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -210,11 +210,11 @@ export function RewriterWorkspace() {
     <main className="workspace-shell">
       <header className="workspace-header">
         <a className="brand-lockup" href="#workspace">
-          <span className="brand-mark">
-            <BookOpenText aria-hidden="true" />
-          </span>
+          <BrandMark />
           <span>
-            <strong>ClearDraft</strong>
+            <strong>
+              <BrandWordmark />
+            </strong>
             <small>Study writing, made clear.</small>
           </span>
         </a>
@@ -320,7 +320,7 @@ export function RewriterWorkspace() {
           </div>
 
           <fieldset className="mode-fieldset">
-            <legend>What should ClearDraft do?</legend>
+            <legend>What should DBtext do?</legend>
             <div className="mode-picker">
               {rewriteModes.map((option) => (
                 <button

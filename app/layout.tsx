@@ -16,15 +16,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  applicationName: "DBtext",
   description:
     "Turn difficult source text into clear, natural high-school explanations.",
   metadataBase: new URL("https://www.dbtext.dev"),
+  openGraph: {
+    description:
+      "Turn difficult writing into clear explanations you can actually understand.",
+    siteName: "DBtext",
+    title: "DBtext — Study writing, made clear",
+    type: "website",
+    url: "/",
+  },
   robots: {
     follow: false,
     index: false,
     nocache: true,
   },
-  title: "ClearDraft — Study writing, made clear",
+  title: "DBtext — Study writing, made clear",
+  twitter: {
+    card: "summary_large_image",
+    description:
+      "Turn difficult writing into clear explanations you can actually understand.",
+    title: "DBtext — Study writing, made clear",
+  },
 };
 
 export default function RootLayout({
