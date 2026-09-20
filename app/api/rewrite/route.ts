@@ -1,4 +1,4 @@
-import { streamText } from "ai";
+import { generateText } from "ai";
 import { NextResponse } from "next/server";
 import {
   buildEducationalPrompt,
@@ -6,9 +6,37 @@ import {
 } from "@/lib/ai/educational-rewriter";
 import { hasStudyAccess } from "@/lib/auth";
 
-export const runtime = "nodejs";
+const DEFAULT_MODEL = "google/gemini-3.8-flash";
 
-const DEFAULT_MODEL = "google/gemini-3.5-flash-lite";
+function hasGatewayAuthentication() {
+  return Boolean(
+    process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN
+  );
+}
+
+function createGenerationErrorResponse(error: unknown) {
+  if (error instanceof Error && error.name === "GatewayAuthenticationError") {
+    return NextResponse.json(
+      {
+        error:
+          "AI Gateway is not connected. On localhost, add AI_GATEWAY_API_KEY and restart the app.",
+      },
+      { status: 503 }
+    );
+  }
+
+  if (error instanceof Error && error.name === "GatewayRateLimitError") {
+    return NextResponse.json(
+      { error: "The AI service is busy. Wait a moment and try again." },
+      { status: 429 }
+    );
+  }
+
+  return NextResponse.json(
+    { error: "The rewriter is unavailable right now. Please try again." },
+    { status: 500 }
+  );
+}
 
 export async function POST(request: Request) {
   try {
@@ -16,6 +44,16 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Unlock the app before using the rewriter." },
         { status: 401 }
+      );
+    }
+
+    if (!hasGatewayAuthentication()) {
+      return NextResponse.json(
+        {
+          error:
+            "AI Gateway is not connected. On localhost, add AI_GATEWAY_API_KEY and restart the app.",
+        },
+        { status: 503 }
       );
     }
 
@@ -34,7 +72,7 @@ export async function POST(request: Request) {
     }
 
     const { prompt, system } = buildEducationalPrompt(parsed.data);
-    const result = streamText({
+    const result = await generateText({
       abortSignal: request.signal,
       maxOutputTokens: 1400,
       maxRetries: 0,
@@ -45,18 +83,16 @@ export async function POST(request: Request) {
       timeout: 45_000,
     });
 
-    return result.toTextStreamResponse({
+    return new Response(result.text, {
       headers: {
         "Cache-Control": "no-store",
+        "Content-Type": "text/plain; charset=utf-8",
         "X-Content-Type-Options": "nosniff",
       },
     });
   } catch (error) {
     console.error("Rewrite request failed", error);
 
-    return NextResponse.json(
-      { error: "The rewriter is unavailable right now. Please try again." },
-      { status: 500 }
-    );
+    return createGenerationErrorResponse(error);
   }
 }
