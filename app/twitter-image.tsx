@@ -71,8 +71,8 @@ export default function TwitterImage() {
             lineHeight: 1,
           }}
         >
-          <span style={{ color: "#be185d" }}>D</span>
-          <span style={{ color: "#b42318" }}>B</span>
+          <span style={{ color: "#d6007f" }}>D</span>
+          <span style={{ color: "#ff1493" }}>B</span>
           <span style={{ color: "#237a40" }}>text</span>
         </div>
         <div

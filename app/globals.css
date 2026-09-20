@@ -144,8 +144,8 @@
   --border: #ded6c1;
   --input: #d6cdb6;
   --ring: #d97706;
-  --brand-d: #be185d;
-  --brand-b: #b42318;
+  --brand-d: #d6007f;
+  --brand-b: #ff1493;
   --brand-text: #237a40;
 }
 
@@ -219,10 +219,65 @@
 
   .brand-wordmark {
     display: inline-flex;
+    align-items: baseline;
     font-family: var(--font-display), sans-serif;
     font-weight: 650;
     letter-spacing: -0.055em;
     line-height: 1;
+  }
+
+  .brand-b-motion {
+    position: relative;
+    display: inline-grid;
+    width: 0.68em;
+    height: 1em;
+    place-items: center;
+    perspective: 4em;
+    vertical-align: -0.08em;
+  }
+
+  .brand-b-glyph,
+  .brand-b-heart {
+    grid-area: 1 / 1;
+  }
+
+  .brand-b-glyph {
+    transform-origin: center;
+    backface-visibility: hidden;
+    animation: brand-b-turn 5.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  .brand-b-heart {
+    width: 0.88em;
+    height: 0.98em;
+    overflow: visible;
+    fill: none;
+    opacity: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 8;
+    animation: brand-heart-show 5.4s ease-in-out infinite;
+  }
+
+  .brand-heart-side {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    animation: brand-heart-draw 5.4s ease-in-out infinite;
+  }
+
+  .brand-heart-side-left {
+    stroke: var(--brand-d);
+  }
+
+  .brand-heart-side-right,
+  .brand-heart-point {
+    stroke: var(--brand-b);
+  }
+
+  .brand-heart-point {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: brand-heart-point 5.4s ease-in-out infinite;
   }
 
   .brand-mark-large {
@@ -770,6 +825,68 @@
   }
 }
 
+@keyframes brand-b-turn {
+  0%,
+  20% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+  31% {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+  69% {
+    opacity: 0;
+    transform: rotateY(270deg);
+  }
+  82%,
+  100% {
+    opacity: 1;
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes brand-heart-show {
+  0%,
+  24%,
+  79%,
+  100% {
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.82);
+  }
+  36%,
+  67% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes brand-heart-draw {
+  0%,
+  27%,
+  80%,
+  100% {
+    stroke-dashoffset: 120;
+  }
+  45%,
+  68% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes brand-heart-point {
+  0%,
+  39%,
+  76%,
+  100% {
+    stroke-dashoffset: 48;
+  }
+  50%,
+  68% {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (max-width: 960px) {
   .workspace-intro {
     grid-template-columns: 1fr;
@@ -850,5 +967,14 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .brand-b-glyph {
+    opacity: 1;
+    transform: none;
+  }
+
+  .brand-b-heart {
+    display: none;
   }
 }
